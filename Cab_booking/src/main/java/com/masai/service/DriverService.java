@@ -10,6 +10,6 @@ public interface DriverService {
 public Driver insertDriver(Driver driver);
 public Driver viewDriverById(Integer id) throws InvalidId;
 public Driver updateDriver(Integer id,Integer license, Boolean available)throws DriverNotFoundException;
-public Driver deleteDriverById(Integer id)throws DriverNotFoundException;
+public String deleteDriverById(Integer id)throws DriverNotFoundException;
 public List<Driver> viewBestDriver()throws DriverNotFoundException;
 }

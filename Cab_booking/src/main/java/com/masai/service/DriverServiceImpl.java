@@ -26,8 +26,7 @@ public class DriverServiceImpl implements DriverService {
 	
 	@Override
 	public Driver insertDriver(Driver driver) {
-		Cab cab= driver.getCab();
-		cDao.save(cab);
+		
 		return dDao.save(driver);
 	}
 
@@ -62,14 +61,15 @@ public class DriverServiceImpl implements DriverService {
 
 	@Override
 
-	public Driver deleteDriverById(Integer id) throws DriverNotFoundException{
+	public String deleteDriverById(Integer id) throws DriverNotFoundException{
           Driver d1=dDao.findById(id).orElseThrow(()-> new DriverNotFoundException("No Driver found"));
         
         cDao.deleteById(d1.getCab().getCabId());
         Adao.delete(d1.getAddress());
 	    dDao.delete(d1);
-	    return d1;
 			
+	
+		return "Driver Id "+id+ " deleted ";
 	}
 
 	@Override

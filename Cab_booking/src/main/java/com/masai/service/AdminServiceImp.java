@@ -78,10 +78,13 @@ public class AdminServiceImp implements AdminService {
 	@Override
 
 	public List<TripBooking> getTripsDriverwise() {
+		
 		List<TripBooking> list = tripDao.findByDriverAscs();
-		System.out.println(list);
-		return list;
-
+		
+		if(list.size() > 0)
+			return list;
+		else
+			throw new AdminExceptions("No trips found");
 		
 	}
 

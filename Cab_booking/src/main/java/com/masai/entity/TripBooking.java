@@ -40,7 +40,7 @@ public class TripBooking {
 	   @NonNull
 	   private Integer CustomerId; 
 	   
-	   @OneToOne(cascade=CascadeType.ALL)
+	   @ManyToOne(cascade=CascadeType.ALL)
 	   @JoinColumn(name="driver_id",referencedColumnName = "driverID")
 	   private Driver driver;
  

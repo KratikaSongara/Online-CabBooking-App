@@ -1,9 +1,12 @@
 package com.masai.entity;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.Min;
@@ -25,10 +28,6 @@ import lombok.ToString;
 public class Driver extends Abstractuser {
 
 
-	@NotNull
-	@Min(value=1, message="id should be more than 1")
-	@PrimaryKeyJoinColumn(name="driverID")
-
 @Min(value=1, message="id should be more than 1")
 private Integer licenseNo;
 @Min(value=1, message="id should be more than 1")
@@ -40,8 +39,8 @@ private Boolean available;
 private Cab cab;
 
 
-@OneToOne(cascade = CascadeType.ALL,mappedBy = "driver",orphanRemoval = true)
+@OneToMany(cascade = CascadeType.ALL,mappedBy = "driver",orphanRemoval = true)
 @JsonIgnore
-private TripBooking tripBooking;
+private List<TripBooking> tripBooking;
 
 }

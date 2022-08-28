@@ -26,7 +26,7 @@ import com.masai.entity.Cab;
 import com.masai.entity.TripBooking;
 import com.masai.service.AdminService;
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
@@ -38,11 +38,7 @@ public class AdminController {
 		return new ResponseEntity<Admin>(savedAdmin,HttpStatus.OK);
 	}
 	
-	@GetMapping("/")
-	public Admin deleteMappingHandler1() {
-		
-		return null;
-	}
+	
 	
 	@DeleteMapping("/{adminId}")
 	public ResponseEntity<Admin> deleteMappingHandler(@PathVariable("adminId") Integer adminId) {
@@ -57,8 +53,8 @@ public class AdminController {
 		return new ResponseEntity<List<TripBooking>>(trips,HttpStatus.OK);
 	}
 	
-	@GetMapping("trips/{cab}")
-	public ResponseEntity<List<TripBooking>> getTripsDriverwiseHandler(@RequestBody Cab cab){
+	@GetMapping("/trips/driverwise")
+	public ResponseEntity<List<TripBooking>> getTripsDriverwiseHandler(){
 		
 		List<TripBooking> trips= adminService.getTripsDriverwise();
 		return new ResponseEntity<List<TripBooking>>(trips,HttpStatus.OK);
@@ -87,8 +83,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("trips/{customerId}/{date}")
-	public List<TripBooking> getTripsDatewiseAndCustomerHandler(@PathVariable("customerId") Integer customerId, @PathVariable("date") LocalDate date){
-		List<TripBooking> list = adminService.getTripsDatewiseAndCustomer(customerId, date);
+	public List<TripBooking> getTripsDatewiseAndCustomerHandler(@PathVariable("customerId") Integer customerId, @PathVariable("date") String date){
+		LocalDate date1 = LocalDate.parse(date);
+		List<TripBooking> list = adminService.getTripsDatewiseAndCustomer(customerId, date1);
 		return list;
 
 	}

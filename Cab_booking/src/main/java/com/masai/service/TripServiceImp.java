@@ -27,13 +27,15 @@ public class TripServiceImp implements TripService {
 	public TripBooking AddTrip(TripBooking tb) throws InvalidId {
 		
 		cdao.findById(tb.getCustomerId()).orElseThrow(() -> new InvalidId("Customer with ID "+tb.getCustomerId()+" does not exit.."));
-		List<Driver> drivers= ddao.viewBestDriver();
+		List<Driver> drivers= ddao.findByAvailable() ;
 		if(drivers.size()==0)
 		{
 			throw new DriverNotFoundException("Sorry No driver Available just now...");
 		}
+//		drivers.forEach((e)->System.out.println(e.getUserId()));
+//		System.out.println(drivers.size());
 		drivers.get(0).setAvailable(false);
-		
+		ddao.save(drivers.get(0));
 		 Integer km = tb.getKm();
 	     Integer price=drivers.get(0).getCab().getRatePerKm();
 	     tb.setTotalamount(km*price);

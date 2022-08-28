@@ -9,11 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.entity.Customer;
@@ -21,7 +21,6 @@ import com.masai.entity.TripBooking;
 import com.masai.service.TripService;
 
 @RestController
-@RequestMapping("/api")
 public class TripbookingController {
 	
 	@Autowired
@@ -35,12 +34,12 @@ public class TripbookingController {
 	}
     
 	@GetMapping("/trips")
-	public List<TripBooking> getAlltrip()
+	public List<TripBooking> getAllCustomer()
 	{    
 		return service.alltrip() ;
 	}
 	@PutMapping("/tripupdate/{id}")
-	public TripBooking updatetrip(@Valid @RequestBody TripBooking trip,@PathVariable("id")Integer id)
+	public TripBooking updateStudent(@Valid @RequestBody TripBooking trip,@PathVariable("id")Integer id)
 	{
 		
 		return service.updateTrip(trip,id);
@@ -50,7 +49,7 @@ public class TripbookingController {
 			
 	    	return service.deletetrip(id);
 		}
-	 @GetMapping("/tripend/{id}")
+	 @PatchMapping("/tripend/{id}")
 		public TripBooking end(@PathVariable("id")Integer id) {
 			
 	    	return service.tripEnd(id);
