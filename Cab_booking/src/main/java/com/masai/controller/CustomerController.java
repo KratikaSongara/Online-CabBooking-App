@@ -49,7 +49,7 @@ public class CustomerController {
 		
 		return service.updateCustomer(customer,id);
 	}
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/customer/delete/{id}")
 	public String delete(@PathVariable("id")Integer id) {
 		
     	return service.deleteCustomer(id);
